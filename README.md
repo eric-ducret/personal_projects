@@ -15,4 +15,5 @@ Each folder is a project. Each project has its own README.
 
 -->
 
-*Coming soon.*
+[![](meta-recurrence/figures/zoomed_quadrant.png)](meta-recurrence/)
+**Meta-Recurrence** — self-referential sequence $u_{n+1} = u_{u_n \bmod (n+1)} + 1$ and its fractal-like convergence landscape.
