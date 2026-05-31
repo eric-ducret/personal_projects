@@ -16,8 +16,6 @@ Nine pairs of initial conditions $(u_0, u_1)$, each evolved for 300 steps.
 
 ![sequences](figures/sequences.png)
 
-The trajectories look erratic at first glance, but something quieter is happening underneath.
-
 ---
 
 ## Difference sequences
