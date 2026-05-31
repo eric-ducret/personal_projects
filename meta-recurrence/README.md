@@ -45,11 +45,9 @@ Both are shown on a log scale. The structure is far from random: bands, voids, a
 
 ## Zoomed positive quadrant
 
-The positive quadrant $(u_0, u_1) \in [0, 200]^2$ is especially striking. Using the colour map $5^{\log(\text{onset})}$ to stretch the contrast:
+The positive quadrant $(u_0, u_1) \in [0, 200]^2$ is cool. Using the colour map $5^{\log(\text{onset})}$ to stretch the contrast:
 
 ![zoomed_quadrant](figures/zoomed_quadrant.png)
-
-Fractal-like filaments of slow convergence thread through a sea of fast-settling seeds. The diagonal and off-diagonal structures suggest the onset is sensitive to the arithmetic relationship between $u_0$ and $u_1$ — divisibility, remainders, and index collisions all interact.
 
 ---
 
