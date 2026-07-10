@@ -23,3 +23,7 @@ Each folder is a project. Each project has its own README.
 <a href="feedback-loop/"><img src="feedback-loop/media/flower.gif" width="360" /></a>
 
 **Feedback Loop** — repeatedly re-encoding/decoding an image through a Stable Diffusion VAE until it hallucinates itself into noise.
+
+<a href="logistic-transients/"><img src="logistic-transients/figures/transient.png" width="360" /></a>
+
+**Logistic Transients** — a plotting bug that showed the logistic map's pre-convergence transient instead of its attractor, and looked better for it.
