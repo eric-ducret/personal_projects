@@ -41,4 +41,4 @@ Each folder is a self-contained project with its own README, code, and results.
 
 <p align="center"><a href="epidemic-topology/"><img src="epidemic-topology/figures/propagation.png" width="360" /></a></p>
 
-**Epidemic Topology** — the same disease model on two 20,000-node networks with identical degree; a stochastic re-run shows the standard deterministic approximation isn't just noisier on the clustered one, it's flat-out wrong about how fast the disease spreads.
+**Epidemic Topology** — same disease model, two identical-degree networks; the standard deterministic approximation turns out to be badly wrong about spread speed on the clustered one.
