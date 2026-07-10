@@ -8,15 +8,19 @@ Animating the modulus with a shifting offset — $(b + t) \bmod M$ for increasin
 
 ## Eye
 
-![eye](media/eye_stripes.png)
-
-![eye animated](media/eye_stripes.gif)
+<table><tr>
+<td align="center"><b>Original</b><br><img src="../sources/eye.jpg" width="260" /></td>
+<td align="center"><b>Stripes</b><br><img src="media/eye_stripes.png" width="260" /></td>
+<td align="center"><b>Animated</b><br><img src="media/eye_stripes.gif" width="260" /></td>
+</tr></table>
 
 ## Flower
 
-![flower](media/flower_stripes.png)
-
-![flower animated](media/flower_stripes.gif)
+<table><tr>
+<td align="center"><b>Original</b><br><img src="../sources/flower.jpg" width="260" /></td>
+<td align="center"><b>Stripes</b><br><img src="media/flower_stripes.png" width="260" /></td>
+<td align="center"><b>Animated</b><br><img src="media/flower_stripes.gif" width="260" /></td>
+</tr></table>
 
 ---
 

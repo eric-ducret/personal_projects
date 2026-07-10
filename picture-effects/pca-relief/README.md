@@ -8,17 +8,21 @@ Edges between strongly-contrasting colors become ridges and craters; flat, unifo
 
 ## Eye
 
-![eye](media/eye_relief.png)
-
-![eye rotating](media/eye_relief.gif)
+<table><tr>
+<td align="center"><b>Original</b><br><img src="../sources/eye.jpg" width="260" /></td>
+<td align="center"><b>Relief</b><br><img src="media/eye_relief.png" width="260" /></td>
+<td align="center"><b>Rotating</b><br><img src="media/eye_relief.gif" width="260" /></td>
+</tr></table>
 
 [Interactive 3D version](media/eye_relief.html) — download and open in a browser to rotate and zoom.
 
 ## Flower
 
-![flower](media/flower_relief.png)
-
-![flower rotating](media/flower_relief.gif)
+<table><tr>
+<td align="center"><b>Original</b><br><img src="../sources/flower.jpg" width="260" /></td>
+<td align="center"><b>Relief</b><br><img src="media/flower_relief.png" width="260" /></td>
+<td align="center"><b>Rotating</b><br><img src="media/flower_relief.gif" width="260" /></td>
+</tr></table>
 
 [Interactive 3D version](media/flower_relief.html) — download and open in a browser to rotate and zoom.
 

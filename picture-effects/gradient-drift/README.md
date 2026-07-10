@@ -8,15 +8,19 @@ Since the gradient always points across an edge, dots starting near an edge get 
 
 ## Eye
 
-![eye](media/eye_drift.png)
-
-![eye animated](media/eye_drift.gif)
+<table><tr>
+<td align="center"><b>Original</b><br><img src="../sources/eye.jpg" width="260" /></td>
+<td align="center"><b>Peak drift</b><br><img src="media/eye_drift.png" width="260" /></td>
+<td align="center"><b>Animated</b><br><img src="media/eye_drift.gif" width="260" /></td>
+</tr></table>
 
 ## Flower
 
-![flower](media/flower_drift.png)
-
-![flower animated](media/flower_drift.gif)
+<table><tr>
+<td align="center"><b>Original</b><br><img src="../sources/flower.jpg" width="260" /></td>
+<td align="center"><b>Peak drift</b><br><img src="media/flower_drift.png" width="260" /></td>
+<td align="center"><b>Animated</b><br><img src="media/flower_drift.gif" width="260" /></td>
+</tr></table>
 
 ---
 
