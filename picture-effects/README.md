@@ -6,7 +6,7 @@ Source photos live in [`sources/`](sources/).
 
 ---
 
-<p align="center"><a href="modulo-stripes/"><img src="modulo-stripes/media/eye_stripes.gif" width="320" /></a></p>
+<p align="center"><a href="modulo-stripes/"><img src="modulo-stripes/media/flower_stripes.gif" width="320" /></a></p>
 
 ### [Modulo Stripes](modulo-stripes/)
 
@@ -14,7 +14,7 @@ Grayscale brightness taken modulo a fixed value, turning smooth edges into topog
 
 ---
 
-<p align="center"><a href="gradient-drift/"><img src="gradient-drift/media/eye_drift.gif" width="320" /></a></p>
+<p align="center"><a href="gradient-drift/"><img src="gradient-drift/media/flower_drift.gif" width="320" /></a></p>
 
 ### [Gradient Drift](gradient-drift/)
 
