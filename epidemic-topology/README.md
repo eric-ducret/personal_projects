@@ -1,44 +1,49 @@
 # Epidemic Topology
 
-> *Does the shape of a social network change how a disease moves through it — even when everyone has the same number of contacts?*
+> Does the *shape* of a social network change how a disease spreads through it?
 
-An SIS (susceptible → infected → susceptible) model run on two networks that are identical except for structure: both exactly 4-regular, both ~20,450 nodes. One is a **grid** wrapped into a torus; the other is a **clustered** network built by recursively replacing each node with a small clique.
+Real populations don't mix randomly — people cluster into families, workplaces, friend groups. If that structure matters, two populations with the exact same number of contacts per person could still have very different epidemics, purely from how those contacts are arranged.
 
-$$P_{x,n+1} = P_{x,n}(1-I) + (1-P_{x,n})\left(1 - \prod_{k=1}^{V} (1 - R \, P_{k,n})\right)$$
+To test that, structure has to be isolated as the only variable: same transmission rule, same number of neighbors per node, same population size — only the network's shape changes.
 
-$P_{x,n}$ is the probability node $x$ is infected at step $n$, $R$ the transmission probability, $I$ the recovery probability, $V$ the neighbors of $x$. This is a deterministic mean-field approximation — it propagates an infection *probability*, not real infected/susceptible individuals.
-
----
-
-## The two networks
+## Two ways to arrange the same number of contacts
 
 <p align="center"><img src="figures/topologies.png" width="800" /></p>
 
-Both are 4-regular by construction. Starting from $K_5$ and recursively replacing each node with a small clique 6 times gives $5 \times 4^6 = 20{,}480$ nodes, close to the grid's $143^2 = 20{,}449$.
+Both networks are exactly 4-regular (every node has 4 neighbors) and close in size (~20,450 nodes):
+
+- **Grid** — a torus-wrapped lattice. No two neighbors of a node are ever neighbors of each other (clustering coefficient = 0).
+- **Clustered** — built by recursively replacing every node with a small clique. Neighbors are tightly interconnected (clustering coefficient = 0.5).
+
+Average shortest path length is nearly identical between them (4.50 vs 4.82) — so if propagation differs, it isn't because one network makes distant people harder to reach.
+
+## The transmission rule
+
+$$P_{x,n+1} = P_{x,n}(1-I) + (1-P_{x,n})\left(1 - \prod_{k=1}^{V} (1 - R \, P_{k,n})\right)$$
+
+Each node's infection probability $P_{x,n}$ updates from its own state and its neighbors' ($R$ = transmission probability per contact, $I$ = recovery probability, $V$ = neighbors of $x$) — a standard deterministic mean-field approximation, not individuals.
 
 ## Propagation dynamics
 
 <p align="center"><img src="figures/propagation.png" width="800" /></p>
 
-The grid's infection curve is a clean sigmoid. The clustered network is slower, and its rate of change is noisy and erratic where the grid's stays smooth.
-
-Worth a quick check: the two networks have nearly identical average shortest path length (4.50 vs 4.82) — so "harder-to-reach sub-populations" isn't the real difference. What differs is the clustering coefficient (0.0 vs 0.5).
+Same model, same parameters, same seed — the grid infects in a clean sigmoid, the clustered network is slower and its rate of change stays noisy throughout.
 
 ---
 
 ## Stochastic validation
 
-The formula above assumes neighbors act independently — exactly what dense clustering violates. Re-running the same rule as a real stochastic process (genuine infected/susceptible states, coin-flip transmission and recovery, 40 runs per network) tests that assumption directly.
+The mean-field formula assumes each neighbor's contribution is independent — exactly what dense clustering violates. Re-running the same rule as a real stochastic process (genuine infected/susceptible states, coin-flip transmission and recovery, 40 runs per network) tests that directly.
 
 <p align="center"><img src="figures/stochastic_vs_meanfield.png" width="800" /></p>
 
-On the grid, the stochastic mean tracks the deterministic curve closely. On the clustered network it doesn't: the deterministic model predicts ~90% infected by iteration 160, the stochastic mean only ~43%. The independence assumption lets it double-count transmissions inside cliques that, in reality, mostly land on already-correlated neighbors.
+On the grid, the stochastic mean tracks the deterministic curve closely. On the clustered network it doesn't: the deterministic model predicts ~90% infected by iteration 160, the stochastic mean only ~43%.
 
 <p align="center"><img src="figures/variation_comparison.png" width="560" /></p>
 
-Averaging the stochastic runs also smooths out nearly all the jagged variation — that noise was a synchronous-update artifact, not a real effect. The true picture: propagation is genuinely, smoothly slower on the clustered network, and the deterministic model got both the smoothness and the speed wrong.
+Averaging the stochastic runs also smooths out nearly all the jagged variation seen in the deterministic clustered curve — that noise was a synchronous-update artifact, not a real effect. Propagation is genuinely, smoothly slower on the clustered network; the deterministic model got both the smoothness and the speed wrong.
 
-(At $R=0.5$, $I=0.1$ the epidemic is comfortably supercritical — none of the 80 stochastic runs went extinct. A deterministic model could never show extinction at all, since it can only decay smoothly toward zero.)
+(At $R=0.5$, $I=0.1$ the epidemic is comfortably supercritical — none of the 80 stochastic runs went extinct.)
 
 ---
 
