@@ -28,6 +28,6 @@ Each folder is a project. Each project has its own README.
 
 **Logistic Transients** — a plotting bug that showed the logistic map's pre-convergence transient instead of its attractor, and looked better for it.
 
-<p align="center"><a href="pea-pattern/"><img src="pea-pattern/figures/graph.png" width="360" /></a></p>
+<p align="center"><a href="pea-pattern/"><img src="pea-pattern/figures/graph_base2.png" width="360" /></a></p>
 
 **Pea Pattern** — a look-and-say variant where, in binary, every number converges to one of only two fixed points.
