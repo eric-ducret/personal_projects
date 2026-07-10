@@ -53,7 +53,7 @@ colors = [R4_PALETTE[k % 8] for k in range(40)]
 with np.errstate(over="ignore", invalid="ignore"):
     for r in r_values:
         ys = transient(r)
-        ax.scatter(np.full(40, r), ys, c=colors, s=1.0, marker='.', linewidths=0)
+        ax.scatter(np.full(40, r), ys, c=colors, s=4.0, marker='.', linewidths=0)
 ax.set_xlim(0.7, 4)
 ax.set_ylim(0, 1.05)
 ax.set_xlabel("r")
@@ -69,7 +69,7 @@ fig, ax = plt.subplots(figsize=(10, 8))
 with np.errstate(over="ignore", invalid="ignore"):
     for r in r_values2:
         ys = converged_tail(r)
-        ax.scatter(np.full(len(ys), r), ys, c="#f0f6fc", s=0.3, marker='.', linewidths=0)
+        ax.scatter(np.full(len(ys), r), ys, c="#f0f6fc", s=1.2, marker='.', linewidths=0)
 ax.set_xlim(0.7, 4)
 ax.set_ylim(0, 1.05)
 ax.set_xlabel("r")

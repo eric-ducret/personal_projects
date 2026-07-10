@@ -4,7 +4,7 @@
 
 The [logistic map](https://en.wikipedia.org/wiki/Logistic_map) $x_{n+1} = r x_n (1 - x_n)$ is usually visualized with a bifurcation diagram: for each $r$, iterate the map many times, throw away the first hundred or so iterations (the *transient*), and plot only the values it settles into (the *attractor*). That's the classic fractal-looking tree.
 
-An R script written to do exactly this had a bug: instead of discarding the transient and keeping the tail, it kept a rolling window of the **first 40 iterations** and plotted those — the part that's normally thrown away. The result isn't the textbook diagram; it's the transient's own geometry, laid bare.
+An R script written to do exactly this had a bug: instead of discarding the transient and keeping the tail, it kept a rolling window of the **first 40 iterations** and plotted those — the part that's normally thrown away. The result is not the textbook bifurcation diagram; it's a plot of the transient itself, before it converges.
 
 ---
 
@@ -13,6 +13,8 @@ An R script written to do exactly this had a bug: instead of discarding the tran
 ![transient](figures/transient.png)
 
 Every point is colored by its step index (1st iterate, 2nd iterate, ... 40th), all starting from the same $x_0 = 0.99999$. Each colored arc is one iteration step traced across every value of $r$ — that's why fanning, layered curves appear where a normal bifurcation diagram just shows a single line splitting in two.
+
+This happens because for low-to-moderate $r$, the map converges quickly, so the first 40 iterates are already close to the eventual attractor and trace out a smooth curve per step. Past the chaotic threshold ($r \gtrsim 3.57$), 40 steps isn't enough to settle anywhere, so the points scatter.
 
 ## What it's supposed to look like
 
