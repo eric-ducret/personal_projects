@@ -24,22 +24,7 @@ Both graphs are exactly 4-regular by construction — the grid because every cel
 
 Starting from a single infected node, the grid's infection curve is a clean sigmoid. The clustered network is slower to take off, reaches full saturation later, and — more strikingly — its rate of change is **noisy and erratic** throughout, where the grid's stays smooth.
 
----
-
-## Flagged: the "isolated sub-populations" explanation doesn't hold up
-
-The original writeup's hypothesis was that clustering slows a disease down because it creates "isolated sub-groups" that are harder to reach — i.e., a **path-length** effect. Checking that directly on comparable preview-scale graphs (81 vs 80 nodes):
-
-| | avg. clustering coefficient | avg. shortest path length |
-|---|---|---|
-| Grid | 0.000 | 4.50 |
-| Clustered | 0.500 | 4.82 |
-
-The average shortest path length is nearly identical between the two — so "distance between sub-populations" is not really what differs here. What *does* differ, by construction, is the **clustering coefficient**: the grid has none (no two neighbors of a node are ever neighbors of each other), while the clustered graph is built entirely out of small dense cliques (clustering = 0.5).
-
-That distinction matters for a more subtle reason than reachability: this model updates **every node synchronously** at every step, and the update rule is a nonlinear feedback loop between a node and its neighbors. Inside a clique, every node's neighbors are also strongly coupled to *each other*, so a local group can jointly overshoot and correct in near-lockstep — exactly the kind of local resonance that produces the noisy, high-frequency variation seen in the clustered curve above. The grid has no such tightly-closed local loops (clustering = 0), so it has nothing to resonate with, and its variation curve stays smooth.
-
-In short: the interesting result here is real, but the mechanism the original report proposed (harder-to-reach sub-populations) doesn't match the measured graph statistics. **Local clustering density interacting with synchronous updating** is a better-supported explanation than path length for both the slower propagation *and* the oscillatory noise.
+Worth a quick check: the original hypothesis was that clustering slows spread by creating harder-to-reach sub-populations, but the two networks have nearly identical average shortest path length (4.50 vs 4.82 on comparable preview-scale graphs) — the real structural difference is the clustering coefficient (0.0 vs 0.5), not distance.
 
 ---
 
