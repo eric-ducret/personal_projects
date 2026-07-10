@@ -18,14 +18,14 @@ Each folder is a self-contained project with its own README, code, and results.
 
 <p align="center"><a href="feedback-loop/"><img src="feedback-loop/media/flower.gif" width="360" /></a></p>
 
-**Feedback Loop** — repeatedly re-encoding/decoding an image through a Stable Diffusion VAE until it hallucinates itself into noise.
+**Feedback Loop** — repeatedly re-encoding/decoding an image through a Stable Diffusion VAE.
 
 <p align="center">
 <a href="picture-effects/"><img src="picture-effects/pca-relief/media/flower_relief.gif" height="260" /></a>
 <a href="picture-effects/"><img src="picture-effects/modulo-stripes/media/eye_stripes.gif" height="260" /></a>
 </p>
 
-**Picture Effects** — three small image effects (modulo-striped contours, gradient-driven dot drift, PCA-height terrain) run on the same eye and flower photos.
+**Picture Effects** — three small image effects: modulo-striped contours, gradient-driven dot drift, PCA-height terrain.
 
 <p align="center"><a href="logistic-transients/"><img src="logistic-transients/figures/transient.png" width="360" /></a></p>
 
@@ -37,7 +37,7 @@ Each folder is a self-contained project with its own README, code, and results.
 
 <p align="center"><a href="meta-recurrence/"><img src="meta-recurrence/figures/zoomed_quadrant.png" width="360" /></a></p>
 
-**Meta-Recurrence** — self-referential sequence $u_{n+1} = u_{u_n \bmod (n+1)} + 1$ and its fractal-like convergence landscape.
+**Meta-Recurrence** — self-referential sequence $u_{n+1} = u_{u_n \bmod (n+1)} + 1$.
 
 <p align="center"><a href="epidemic-topology/"><img src="epidemic-topology/figures/propagation.png" height="360" /></a></p>
 
