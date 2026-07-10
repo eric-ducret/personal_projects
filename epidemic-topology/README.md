@@ -1,10 +1,6 @@
 # Epidemic Topology
 
-> Does the *shape* of a social network change how a disease spreads through it?
-
-Real populations don't mix randomly — people cluster into families, workplaces, friend groups. If that structure matters, two populations with the exact same number of contacts per person could still have very different epidemics, purely from how those contacts are arranged.
-
-To test that, structure has to be isolated as the only variable: same transmission rule, same number of neighbors per node, same population size — only the network's shape changes.
+An SIS model run on two networks with identical degree and similar size, differing only in structure — isolating whether topology alone changes how a disease spreads.
 
 ## Two ways to arrange the same number of contacts
 
@@ -42,8 +38,6 @@ On the grid, the stochastic mean tracks the deterministic curve closely. On the 
 <p align="center"><img src="figures/variation_comparison.png" width="560" /></p>
 
 Averaging the stochastic runs also smooths out nearly all the jagged variation seen in the deterministic clustered curve — that noise was a synchronous-update artifact, not a real effect. Propagation is genuinely, smoothly slower on the clustered network; the deterministic model got both the smoothness and the speed wrong.
-
-(At $R=0.5$, $I=0.1$ the epidemic is comfortably supercritical — none of the 80 stochastic runs went extinct.)
 
 ---
 
