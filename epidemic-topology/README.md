@@ -39,18 +39,36 @@ The average shortest path length is nearly identical between the two — so "dis
 
 That distinction matters for a more subtle reason than reachability: this model updates **every node synchronously** at every step, and the update rule is a nonlinear feedback loop between a node and its neighbors. Inside a clique, every node's neighbors are also strongly coupled to *each other*, so a local group can jointly overshoot and correct in near-lockstep — exactly the kind of local resonance that produces the noisy, high-frequency variation seen in the clustered curve above. The grid has no such tightly-closed local loops (clustering = 0), so it has nothing to resonate with, and its variation curve stays smooth.
 
-In short: the interesting result here is real, but the mechanism the original report proposed (harder-to-reach sub-populations) doesn't match the measured graph statistics. **Local clustering density interacting with synchronous updating** is a better-supported explanation than path length for both the slower propagation *and* the oscillatory noise — and that noise may partly be a synchronous-update artifact of the mean-field approximation itself rather than a real epidemiological effect. It's exactly the kind of thing an asynchronous or stochastic (Gillespie-style) simulation would help settle, and the original report's own suggested next step — adding a resistant state — wouldn't address this at all.
+In short: the interesting result here is real, but the mechanism the original report proposed (harder-to-reach sub-populations) doesn't match the measured graph statistics. **Local clustering density interacting with synchronous updating** is a better-supported explanation than path length for both the slower propagation *and* the oscillatory noise.
+
+---
+
+## Stochastic validation
+
+The formula above is a *mean-field* approximation: it propagates an infection **probability** deterministically, assuming a node's neighbors act independently. That assumption is exactly what dense local clustering violates. To check what the model is actually getting wrong, the same rule was re-run as a real stochastic process on the same two graphs — every node is genuinely infected or not, transmission per edge is a coin flip with probability $R$, recovery is a coin flip with probability $I$ — for 40 independent runs per network.
+
+<p align="center"><img src="figures/stochastic_vs_meanfield.png" width="800" /></p>
+
+On the **grid**, the stochastic mean tracks the deterministic curve closely — the mean-field approximation is basically fine there, as expected with zero clustering.
+
+On the **clustered** network, it isn't a minor discrepancy: by iteration 160 the deterministic model predicts ~90% of the population infected, while the actual stochastic mean over 40 runs is only ~43%. The mean-field model doesn't just get the *noise* wrong on this network, it gets the *speed* wrong — badly, and in one consistent direction (too fast). The independence assumption lets the model "double count" transmission opportunities inside a clique that, in reality, mostly land on individuals who are already infected or about to be through a correlated neighbor.
+
+<p align="center"><img src="figures/variation_comparison.png" width="560" /></p>
+
+Averaging 40 stochastic runs also smooths out almost all of the jagged variation the deterministic model showed for the clustered network — confirming that noise was mostly a synchronous-update artifact of the mean-field approximation, not a real epidemiological effect. The true picture is simpler than either version first suggested: propagation is genuinely, smoothly slower on the clustered network — the deterministic model invented the jaggedness and, at the same time, badly underestimated just how much slower it really is.
+
+(With $R=0.5$, $I=0.1$ on 4-regular graphs of ~20,000 nodes, the epidemic is comfortably supercritical — none of the 80 stochastic runs died out. Extinction from a single seed would be a real possibility closer to the epidemic threshold, which the deterministic model, being unable to hit exactly zero, could never show at all.)
 
 ---
 
 ## Code
 
 ```
-code/generate_figures.py   — graph construction, vectorized simulation, both figures above
+code/generate_figures.py   — graph construction, deterministic + stochastic simulation, every figure above
 ```
 
 ```bash
 python code/generate_figures.py
 ```
 
-Requires `networkx`, `numpy`, `matplotlib`. The simulation loop is vectorized (fixed-degree neighbor lookup array), verified to match the original per-node update exactly, and runs the full ~20,450-node, 160-iteration simulation for both networks in a few seconds.
+Requires `networkx`, `numpy`, `matplotlib`. Both the deterministic and stochastic simulation loops are vectorized (fixed-degree neighbor lookup array); the deterministic one is verified to match the original per-node update exactly. The full ~20,450-node, 160-iteration run — deterministic plus 40 stochastic replicates per network — takes under a minute.

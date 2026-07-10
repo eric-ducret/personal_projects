@@ -88,6 +88,30 @@ def simulate(neighbor_idx, N, R, I, iterations, seed_node=0):
 
 
 # ---------------------------------------------------------------------
+# stochastic validation: an actual random contact process on the same
+# graph, same R/I, same rule -- but nodes are really infected or not,
+# not a propagated probability. Checks whether the mean-field curve
+# (and its noisy variation on the clustered graph) reflects the real
+# stochastic dynamics, or is an artifact of the deterministic,
+# synchronous mean-field update.
+# ---------------------------------------------------------------------
+
+def stochastic_run(neighbor_idx, N, R, I, iterations, seed_node, rng):
+    state = np.zeros(N, dtype=bool)
+    state[seed_node] = True
+    history = np.empty(iterations + 1)
+    history[0] = state.mean()
+    for t in range(1, iterations + 1):
+        infected_neighbors = state[neighbor_idx]
+        prob_infect = 1 - np.prod(np.where(infected_neighbors, 1 - R, 1.0), axis=1)
+        newly_infected = (~state) & (rng.random(N) < prob_infect)
+        stays_infected = state & (rng.random(N) >= I)
+        state = newly_infected | stays_infected
+        history[t] = state.mean()
+    return history
+
+
+# ---------------------------------------------------------------------
 # Figure 1: topology preview
 # ---------------------------------------------------------------------
 
@@ -153,3 +177,57 @@ plt.tight_layout()
 plt.savefig(FIGURES / "propagation.png", dpi=150, facecolor="#0d1117")
 plt.close(fig)
 print("saved propagation.png")
+
+
+# ---------------------------------------------------------------------
+# Figure 3: stochastic replicates vs. the deterministic mean-field curve
+# ---------------------------------------------------------------------
+
+N_REPLICATES = 40
+rng = np.random.default_rng(0)
+
+print(f"--- running {N_REPLICATES} stochastic replicates per network ---")
+grid_runs = np.array([stochastic_run(grid_idx, grid_N, R, I, ITERATIONS, 0, rng)
+                       for _ in range(N_REPLICATES)])
+clust_runs = np.array([stochastic_run(clust_idx, clust_N, R, I, ITERATIONS, 0, rng)
+                        for _ in range(N_REPLICATES)])
+
+grid_extinct = int((grid_runs[:, -1] == 0).sum())
+clust_extinct = int((clust_runs[:, -1] == 0).sum())
+print(f"Grid: {grid_extinct}/{N_REPLICATES} replicates went extinct")
+print(f"Clustered: {clust_extinct}/{N_REPLICATES} replicates went extinct")
+
+fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+for ax, runs, det_hist, title, color in [
+    (axes[0], grid_runs, grid_hist, "Grid", GRID_COLOR),
+    (axes[1], clust_runs, clust_hist, "Clustered", CLUST_COLOR),
+]:
+    for run in runs:
+        ax.plot(run, color=color, alpha=0.15, linewidth=0.8)
+    ax.plot(runs.mean(axis=0), color=color, linewidth=2, label="stochastic mean")
+    ax.plot(det_hist, color="#f0f6fc", linestyle="--", linewidth=1.5, label="deterministic mean-field")
+    ax.set_title(f"{title}: {N_REPLICATES} stochastic runs vs. mean-field")
+    ax.set_xlabel("Iterations")
+    ax.set_ylabel("Proportion of infected individuals")
+    ax.legend()
+plt.tight_layout()
+plt.savefig(FIGURES / "stochastic_vs_meanfield.png", dpi=150, facecolor="#0d1117")
+plt.close(fig)
+print("saved stochastic_vs_meanfield.png")
+
+grid_stoch_var = np.diff(grid_runs.mean(axis=0))
+clust_stoch_var = np.diff(clust_runs.mean(axis=0))
+
+fig, ax = plt.subplots(figsize=(7, 5))
+ax.plot(clust_var, color=CLUST_COLOR, alpha=0.4, linewidth=1, label="Clustered, deterministic")
+ax.plot(clust_stoch_var, color=CLUST_COLOR, linewidth=2, label="Clustered, stochastic mean")
+ax.plot(grid_var, color=GRID_COLOR, alpha=0.4, linewidth=1, label="Grid, deterministic")
+ax.plot(grid_stoch_var, color=GRID_COLOR, linewidth=2, label="Grid, stochastic mean")
+ax.set_title(f"Variation over iterations: deterministic vs. averaged stochastic ({N_REPLICATES} runs)")
+ax.set_xlabel("Iterations")
+ax.set_ylabel("Variation of infected proportion")
+ax.legend(fontsize=8)
+plt.tight_layout()
+plt.savefig(FIGURES / "variation_comparison.png", dpi=150, facecolor="#0d1117")
+plt.close(fig)
+print("saved variation_comparison.png")
