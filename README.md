@@ -1,8 +1,8 @@
-# Nerdy Explorations
+# Explorations
 
-A collection of things I find interesting. Math, code, simulations, visualizations, whatever catches my curiosity.
+Math, simulations, and generative visuals — built to answer a curiosity or to make something that looks good, often both.
 
-Each folder is a project. Each project has its own README.
+Each folder is a self-contained project with its own README, code, and results.
 
 ---
 
