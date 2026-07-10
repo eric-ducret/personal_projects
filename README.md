@@ -39,6 +39,6 @@ Each folder is a self-contained project with its own README, code, and results.
 
 **Picture Effects** — three small image effects (modulo-striped contours, gradient-driven dot drift, PCA-height terrain) run on the same eye and flower photos.
 
-<p align="center"><a href="epidemic-topology/"><img src="epidemic-topology/figures/propagation.png" width="360" /></a></p>
+<p align="center"><a href="epidemic-topology/"><img src="epidemic-topology/figures/propagation.png" height="360" /></a></p>
 
 **Epidemic Topology** — the same disease model run over two population structures with identical degree, to see how much just the shape of the network changes how it spreads.
