@@ -42,3 +42,7 @@ Each folder is a self-contained project with its own README, code, and results.
 <p align="center"><a href="epidemic-topology/"><img src="epidemic-topology/figures/propagation.png" height="360" /></a></p>
 
 **Epidemic Topology** — the same disease model run over two population structures with identical degree, to see how much just the shape of the network changes how it spreads.
+
+<p align="center"><a href="motion-heatmap/"><img src="motion-heatmap/max_delta_heatmap.png" height="360" /></a></p>
+
+**Motion Heatmap** — for every pixel in a video, keep its color from the single frame where it changed the most.
